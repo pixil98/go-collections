@@ -33,6 +33,13 @@ func (s *Stack[T]) Pop() T {
 	return item
 }
 
+func (s *Stack[T]) Peek() T {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	return s.items[len(s.items)-1]
+}
+
 func (s *Stack[T]) Length() int {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
