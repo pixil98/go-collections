@@ -37,7 +37,13 @@ func (s *Stack[T]) Peek() T {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 
-	return s.items[len(s.items)-1]
+	length := len(s.items)
+	if length == 0 {
+		var zero T
+		return zero
+	}
+
+	return s.items[length-1]
 }
 
 func (s *Stack[T]) Length() int {
